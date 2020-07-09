@@ -12,7 +12,7 @@ parameters:
 
   - name: templateParametersFile
     type: string
-    default: Templates\image-builder.params.tyler.json
+    default: Templates/image-builder.params.tyler.json
 
 stages:
   - stage: CreateImage
@@ -27,5 +27,5 @@ stages:
               resourceGroupName: ${{ parameters.resourceGroupName }}
               location: ${{ parameters.location }}
               templateLocation: Linked artifact
-              csmFile: Templates\image-builder.json
-              csmParametersFile: ${{ parameters.templateParametersFile }}
+              csmFile: $(Pipeline.Workspace)/s/Templates/image-builder.json
+              csmParametersFile: $(Pipeline.Workspace)/s/${{ parameters.templateParametersFile }}

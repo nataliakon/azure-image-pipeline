@@ -48,6 +48,7 @@ stages:
               pwsh: true
               azureSubscription: $(AzureConnectionName)
               scriptType: InlineScript
+              azurePowerShellVersion: LatestVersion
               inline: |
                 Invoke-AzResourceAction -Action Run `
                   -ResourceName $(imageTemplateName) `

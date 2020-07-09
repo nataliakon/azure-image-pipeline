@@ -30,7 +30,7 @@ stages:
       - job: CreateImageJob
         displayName: Create Image Job
         variables:
-          imageTemplateName: WVD-AIB-Tyler-$(Build.BuildNumber)
+          imageTemplateName: WVD-AIB-$(Build.BuildNumber)
         steps:
           - task: AzureResourceGroupDeployment@2
             inputs:
@@ -41,3 +41,18 @@ stages:
               csmFile: $(Pipeline.Workspace)/s/Templates/image-builder.json
               csmParametersFile: $(Pipeline.Workspace)/s/${{ parameters.templateParametersFile }}
               overrideParameters: -imageTemplateName $(imageTemplateName)
+              deploymentOutputs: OutputsJson
+          - task: AzurePowerShell@4
+            displayName: Build Image from Template
+            inputs:
+              pwsh: true
+              azureSubscription: $(AzureConnectionName)
+              scriptType: InlineScript
+              inline: |
+                Invoke-AzResourceAction -Action Run `
+                  -ResourceName $(imageTemplateName) `
+                  -ResourceGroupName ${{ parameters.resourceGroupName }} `
+                  -ResourceType 'Microsoft.VirtualMachineImages/imageTemplates' `
+                  -Force -Verbose
+
+          

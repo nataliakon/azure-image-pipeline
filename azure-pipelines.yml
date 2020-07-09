@@ -29,6 +29,8 @@ stages:
     jobs:
       - job: CreateImageJob
         displayName: Create Image Job
+        variables:
+          imageTemplateName: WVD-AIB-Tyler-$(Build.BuildNumber)
         steps:
           - task: AzureResourceGroupDeployment@2
             inputs:
@@ -38,3 +40,4 @@ stages:
               templateLocation: Linked artifact
               csmFile: $(Pipeline.Workspace)/s/Templates/image-builder.json
               csmParametersFile: $(Pipeline.Workspace)/s/${{ parameters.templateParametersFile }}
+              overrideParameters: -imageTemplateName $(imageTemplateName)

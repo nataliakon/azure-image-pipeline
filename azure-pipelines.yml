@@ -1,0 +1,31 @@
+trigger: none
+pr: none
+
+parameters:
+  - name: location
+    default: canadacentral
+    type: string
+
+  - name: resourceGroupName
+    default: WVD-RGP-ImageBuilder
+    type: string
+
+  - name: templateParametersFile
+    type: string
+    default: Templates\image-builder.params.tyler.json
+
+stages:
+  - stage: CreateImage
+    displayName: Create Image Stage
+    jobs:
+      - job: CreateImageJob
+        displayName: Create Image Job
+        steps:
+          - task: AzureResourceGroupDeployment@2
+            inputs:
+              azureSubscription: $(AzureConnectionName)
+              resourceGroupName: ${{ parameters.resourceGroupName }}
+              location: ${{ parameters.location }}
+              templateLocation: linked Artifact
+              csmFile: Templates\image-builder.json
+              csmParametersFile: ${{ parameters.templateParametersFile }}

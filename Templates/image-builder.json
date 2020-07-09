@@ -1,0 +1,143 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "imageTemplateName": {
+            "type": "string"
+        },
+        "api-version": {
+            "type": "string",
+            "defaultValue": "2020-02-14"
+        },
+        "location": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().location]"
+        },
+        "MSIResourceId": {
+            "type": "string",
+            "metadata": {
+                "description": "Resource Id for the User Assigned Managed Service Identity to run the image build"
+            }
+        },
+        "VMSize": {
+            "type": "string",
+            "defaultValue": "Standard_D2_v2"
+        },
+        "galleryImageResourceId": {
+            "type": "string",
+            "metadata": {
+                "description": "Resource Id for the shared gallery image to distribute to"
+            }
+        },
+        "runOutputName": {
+            "type": "string",
+            "metadata": {
+                "description": "Run output name for image gallery"
+            }
+        },
+        "imageReplicationRegion": {
+            "type": "string",
+            "metadata": {
+                "description": "Azure region to replicate the shared gallery image"
+            }
+        }
+    },
+
+    "variables": {
+    },
+
+
+    "resources": [
+        {
+            "name": "[parameters('imageTemplateName')]",
+            "type": "Microsoft.VirtualMachineImages/imageTemplates",
+            "apiVersion": "[parameters('api-version')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [],
+            "tags": {
+                "imagebuilderTemplate": "AzureImageBuilderSIG",
+                "userIdentity": "enabled"
+            },
+            "identity": {
+                "type": "UserAssigned",
+                "userAssignedIdentities": {
+                    "[parameters('MSIResourceId')]": {}
+
+                }
+            },
+
+            "properties": {
+                "buildTimeoutInMinutes": 100,
+
+                "vmProfile": {
+                    "vmSize": "[parameters('VMSize')]",
+                    "osDiskSizeGB": 0
+                },
+
+                "source": {
+                    "type": "PlatformImage",
+                    "publisher": "MicrosoftWindowsDesktop",
+                    "offer": "office-365",
+                    "sku": "19h2-evd-o365pp",
+                    "version": "latest"
+
+                },
+                "customize": [
+
+                    {
+                        "type": "PowerShell",
+                        "name": "CreateBuildPath",
+                        "scriptUri": "https://raw.githubusercontent.com/danielsollondon/azvmimagebuilder/master/testPsScript.ps1"
+                    },
+                    {
+                        "type": "WindowsRestart",
+                        "restartCheckCommand": "echo Azure-Image-Builder-Restarted-the-VM  > c:\\buildArtifacts\\azureImageBuilderRestart.txt",
+                        "restartTimeout": "5m"
+                    },
+                    {
+                        "type": "File",
+                        "name": "downloadBuildArtifacts",
+                        "sourceUri": "https://raw.githubusercontent.com/danielsollondon/azvmimagebuilder/master/quickquickstarts/exampleArtifacts/buildArtifacts/index.html",
+                        "destination": "c:\\buildArtifacts\\index.html"
+                    },
+
+                    {
+                        "type": "PowerShell",
+                        "name": "settingUpMgmtAgtPath",
+                        "inline": [
+                            "mkdir c:\\buildActions",
+                            "echo Azure-Image-Builder-Was-Here  > c:\\buildActions\\buildActionsOutput.txt"
+                        ]
+                    },
+
+                    {
+                        "type": "WindowsUpdate",
+                        "searchCriteria": "IsInstalled=0",
+                        "filters": [
+                            "exclude:$_.Title -like '*Preview*'",
+                            "include:$true"
+                        ],
+                        "updateLimit": 40
+                    }
+
+                ],
+                "distribute": [
+                    {
+                        "type": "SharedImage",
+                        "galleryImageId": "[parameters('galleryImageResourceId')]",
+                        "runOutputName": "[parameters('runOutputName')]",
+                        "artifactTags": {
+                            "source": "azureVmImageBuilder",
+                            "baseosimg": "MicrosoftWindows10Desktop"
+                        },
+                        "replicationRegions": [
+                            "[parameters('imageReplicationRegion')]"
+                        ]
+                    }
+                ]
+            }
+        }
+
+
+    ]
+}

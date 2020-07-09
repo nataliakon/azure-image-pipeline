@@ -1,0 +1,21 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "imageTemplateName": {
+            "value": "WVD-AIB-Tyler"
+        },
+        "MSIResourceId": {
+            "value": "/subscriptions/45a36c26-54ca-48a8-b3c8-e582d6c8627b/resourceGroups/WVD-RGP-ImageGallery/providers/Microsoft.ManagedIdentity/userAssignedIdentities/WVD-Image-MSI"
+        },
+        "galleryImageResourceId": {
+            "value": "/subscriptions/45a36c26-54ca-48a8-b3c8-e582d6c8627b/resourceGroups/WVD-RGP-ImageGallery/providers/Microsoft.Compute/galleries/WVDSIG01/images/WIN10"
+        },
+        "runOutputName": {
+            "value": "Windows10Desktop"
+        },
+        "imageReplicationRegion": {
+            "value": "canadacentral"
+        }
+    }
+}

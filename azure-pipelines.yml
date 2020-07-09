@@ -3,8 +3,17 @@ pr: none
 
 parameters:
   - name: location
-    default: canadacentral
+    default: eastus
     type: string
+    values:
+      - eastus
+      - eastus2
+      - westcentralus
+      - westus
+      - westus2
+      - southcentralus
+      - northeurope
+      - westeurope
 
   - name: resourceGroupName
     default: WVD-RGP-ImageBuilder

@@ -26,6 +26,6 @@ stages:
               azureSubscription: $(AzureConnectionName)
               resourceGroupName: ${{ parameters.resourceGroupName }}
               location: ${{ parameters.location }}
-              templateLocation: linked Artifact
+              templateLocation: Linked artifact
               csmFile: Templates\image-builder.json
               csmParametersFile: ${{ parameters.templateParametersFile }}

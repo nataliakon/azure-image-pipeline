@@ -21,7 +21,7 @@ parameters:
 
   - name: templateParametersFile
     type: string
-    default: Templates/image-builder.params.tyler.json
+    default: Templates/image-builder.params.nk.json
 
 stages:
   - stage: CreateImage

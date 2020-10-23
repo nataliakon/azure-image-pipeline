@@ -34,7 +34,7 @@ stages:
         steps:
           - task: AzureResourceGroupDeployment@2
             inputs:
-              azureSubscription: $(AzureConnectionName)
+              azureSubscription: AzDevOPS
               resourceGroupName: ${{ parameters.resourceGroupName }}
               location: ${{ parameters.location }}
               templateLocation: Linked artifact
@@ -46,7 +46,7 @@ stages:
             displayName: Build Image from Template
             inputs:
               pwsh: true
-              azureSubscription: $(AzureConnectionName)
+              azureSubscription: AzDevOPS
               scriptType: InlineScript
               azurePowerShellVersion: LatestVersion
               inline: |

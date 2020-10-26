@@ -93,13 +93,13 @@
                             {
                 "type": "File",
                 "name": "Download Load-Apps.ps1",
-                "sourceUri":"https://azminlandevops01.blob.core.windows.net/aib-scripts/Load-Apps.ps1?sp=r&st=2020-10-23T23:12:35Z&se=2020-10-24T07:12:35Z&spr=https&sv=2019-12-12&sr=b&sig=3K8700tMIGyctTvD19hSF24GKw6aQZ3twkvOEF5XdG8%3D",
+                "sourceUri":"https://azminlandevops01.blob.core.windows.net/aib-scripts/Load-Apps.ps1?sp=r&st=2020-10-26T00:32:00Z&se=2020-10-26T08:32:00Z&spr=https&sv=2019-12-12&sr=b&sig=OPyLja6XOX8mJqZ2Cd2%2FXgEb0pqw623sZNOoELrN3vk%3D",
                 "destination": "c:\\Distribs\\Load-Apps.ps1"
             },
                                         {
                 "type": "File",
                 "name": "Download Install-Apps.ps1",
-                "sourceUri":"https://azminlandevops01.blob.core.windows.net/aib-scripts/Install-Apps.ps1?sp=r&st=2020-10-23T23:11:48Z&se=2020-10-24T07:11:48Z&spr=https&sv=2019-12-12&sr=b&sig=XOVBh75stW87%2FjVyd%2B8k9MEhuBXrtzMxeFLuJGuSdrc%3D",
+                "sourceUri":"https://azminlandevops01.blob.core.windows.net/aib-scripts/Install-Apps.ps1?sp=r&st=2020-10-26T00:32:18Z&se=2020-10-26T08:32:18Z&spr=https&sv=2019-12-12&sr=b&sig=ljTqxfU5Xy%2FBHify2sCXqDjpBuVYrqJynos%2BwmLojl4%3D",
                 "destination": "c:\\Distribs\\Install-Apps.ps1"
             },
 

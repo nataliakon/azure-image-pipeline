@@ -92,15 +92,15 @@
             },
                             {
                 "type": "File",
-                "name": "Download Load-Apps.ps1",
-                "sourceUri":"https://azminlandevops01.blob.core.windows.net/aib-scripts/Load-Apps.ps1?sp=r&st=2020-10-26T00:32:00Z&se=2020-10-26T08:32:00Z&spr=https&sv=2019-12-12&sr=b&sig=OPyLja6XOX8mJqZ2Cd2%2FXgEb0pqw623sZNOoELrN3vk%3D",
-                "destination": "c:\\Distribs\\Load-Apps.ps1"
+                "name": "Download Load-Office.ps1",
+                "sourceUri":"https://azminlandevops01.blob.core.windows.net/aib-scripts/Load-Office.ps1?sp=r&st=2020-10-27T21:08:58Z&se=2020-10-28T05:08:58Z&spr=https&sv=2019-12-12&sr=b&sig=TmdeG9UN9dww%2FeVUuCMzNE0aLx4V%2FZVx6V%2BDcIpYDUA%3D",
+                "destination": "c:\\Distribs\\Load-Office.ps1"
             },
                                         {
                 "type": "File",
-                "name": "Download Install-Apps.ps1",
-                "sourceUri":"https://azminlandevops01.blob.core.windows.net/aib-scripts/Install-Apps.ps1?sp=r&st=2020-10-26T00:32:18Z&se=2020-10-26T08:32:18Z&spr=https&sv=2019-12-12&sr=b&sig=ljTqxfU5Xy%2FBHify2sCXqDjpBuVYrqJynos%2BwmLojl4%3D",
-                "destination": "c:\\Distribs\\Install-Apps.ps1"
+                "name": "Download Install-Office.ps1",
+                "sourceUri":"https://azminlandevops01.blob.core.windows.net/aib-scripts/Install-Office.ps1?sp=r&st=2020-10-27T21:08:04Z&se=2020-10-28T05:08:04Z&spr=https&sv=2019-12-12&sr=b&sig=LopMkKHcPNd9OAMzS%2B0fJTqp7yKDVw4BT%2BVjQmEZISo%3D",
+                "destination": "c:\\Distribs\\Install-Office.ps1"
             },
 
                   {
@@ -108,7 +108,7 @@
                 "name": "Download Persona Apps",
                 "runElevated": true, 
                 "inline": [
-                    "powershell.exe -file c:\\Distribs\\Load-Apps.ps1"
+                    "powershell.exe -file c:\\Distribs\\Load-Office.ps1"
                 ]
             },
                   {
@@ -116,7 +116,7 @@
                 "name": "Install Persona Apps",
                 "runElevated": true, 
                 "inline": [
-                    "powershell.exe -file c:\\Distribs\\Install-Apps.ps1"
+                    "powershell.exe -file c:\\Distribs\\Install-Office.ps1"
                 ]
             }
                 ],
